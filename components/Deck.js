@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { container } from '../utils/genericStyles'
 

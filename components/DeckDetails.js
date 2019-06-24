@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 
 
@@ -26,7 +27,7 @@ class DeckDetails extends Component {
                 <View style={styles.coverOptions}>
                     <TouchableOpacity 
                         style={styles.button}
-                        onPress={onPressAddCard}
+                        onPress={() => this.props.navigation.navigate('CardForm')}
                         >
                         <Text>Add Card</Text>
                     </TouchableOpacity>
@@ -84,4 +85,4 @@ export const styles = StyleSheet.create({
     }
 })
 
-export default connect()(DeckDetails)
+export default withNavigation(connect()(DeckDetails))

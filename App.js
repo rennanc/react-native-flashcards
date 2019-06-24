@@ -6,6 +6,7 @@ import reducer from './reducers'
 import DeckCollection from './components/DeckCollection'
 import DeckDetails from './components/DeckDetails'
 import DeckForm from './components/DeckForm'
+import CardForm from './components/CardForm'
 import StatusBarApp from './components/StatusBarApp'
 import {purple} from './utils/colors'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -27,6 +28,12 @@ const StackRouteConfigs = createStackNavigator({
     screen: DeckForm,
     navigationOptions: {
       title: 'New Deck'
+    }
+  },
+  CardForm: {
+    screen: CardForm,
+    navigationOptions: {
+      title: 'New Card'
     }
   }
 });
