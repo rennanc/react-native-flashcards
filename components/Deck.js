@@ -1,30 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withNavigation } from 'react-navigation'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { container } from '../utils/genericStyles'
 
 
-showCards = () => {
 
-}
-
-function Deck({deck}) {
-    return(
-        <TouchableOpacity 
-            onPress={() => {showCards(deck.key)}}
-            >
-            <ListItem 
-                key={deck.key}
-                title={deck.name}
-                subtitle={deck.numberCards + ' Carta(s)'}
-            />
-        </TouchableOpacity>
-    )
+class Deck extends Component {
+    render(){
+        const { deck } = this.props;
+        const key = Object.keys(deck)
+        return(
+            <TouchableOpacity 
+                onPress={() => this.props.navigation.navigate('DeckDetails',
+              { deck: deck })}
+                >
+                <ListItem 
+                    key={key}
+                    title={deck[key].name}
+                    subtitle={deck[key].numberCards + ' Card(s)'}
+                />
+            </TouchableOpacity>
+        )
+    }
 }
 
 export const styles = StyleSheet.create({
     ...container,
 })
 
-export default connect()(Deck)
+export default withNavigation(connect()(Deck))
