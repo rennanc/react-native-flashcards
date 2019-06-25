@@ -5,8 +5,7 @@ import { View, Text , Switch, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
-import { createCard } from '../utils/api'
-import { addCard } from '../actions/cards'
+import { handleCreateCard } from '../actions/cards'
 import { generateUID } from '../utils/helpers'
 
 class CardForm extends Component {
@@ -17,15 +16,17 @@ class CardForm extends Component {
     }
 
     onPressSubmit = () => {
-        const { dispatch } = this.props
+        const { dispatch, navigation } = this.props
 
+        const deckKey = navigation.getParam('deckKey', null)
         const key = generateUID()
         const card = {
             text: this.state.text,
             answer: this.state.answer,
+            deckKey: deckKey
         }
-        dispatch(addCard({[key]: card}))
-        createCard({ key, card })
+        dispatch(handleCreateCard(key, card))
+            .then(() => this.props.navigation.goBack(null))
     }
 
     render(){

@@ -19,7 +19,7 @@ class Deck extends Component {
                 <ListItem 
                     key={key}
                     title={deck[key].name}
-                    subtitle={deck[key].numberCards + ' Card(s)'}
+                    subtitle={deck[key].cardCount + ' Card(s)'}
                 />
             </TouchableOpacity>
         )

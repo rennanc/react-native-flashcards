@@ -39,15 +39,15 @@ class DeckCollection extends Component {
     render(){
         const { decks } = this.props
         const decksMock = [
-            {
-                key: '04934920492304',
-                name: 'numero 1',
-                numberCards: 3
+            {'04934920492304':{
+                    name: 'numero 1',
+                    cardCount: 3
+                }
             },
-            {
-                key: '049353452304',
-                name: 'numero 2',
-                numberCards: 8
+            {'049353452304' :{
+                    name: 'numero 2',
+                    cardCount: 8
+                }
             }
         ]
         return (

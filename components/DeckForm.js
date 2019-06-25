@@ -17,34 +17,19 @@ class DeckForm extends Component {
     }
 
     onPressSubmit = () => {
-        const { dispatch } = this.props
+        const { dispatch, id } = this.props
 
         const key = generateUID()
         const deck = {
             name: this.state.name,
-            numberCards: 0,
+            cardCount: 0,
         }
         dispatch(addDeck({[key]: deck}))
         createDeck({ key, deck })
-        /*createDeck({
-            [key]: deck
-          })
-          .then((deck) => dispatch(addDeck(deck)))
-          .then(() => console.warn('foi?!'))*/
-
-        this.setState(() => ({
-           toHome: key ? false : true,
-        }))
+            .then(() => this.props.navigation.goBack())
     }
 
     render(){
-
-       const { toHome } = this.state
-
-        if(toHome === true){
-            return this.props.navigation.goBack()
-        }
-
         return(
             <View>
                 <Input 

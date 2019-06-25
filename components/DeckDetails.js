@@ -15,19 +15,18 @@ onPressStartQuiz = () => {
 
 class DeckDetails extends Component {
     render(){
-        const { navigation } = this.props;
-        const deck = navigation.getParam('deck', {});
+        const { deck } = this.props;
         const key = Object.keys(deck)
         return(
             <View style={styles.container}>
                 <View style={styles.cover}>
                     <Text style={styles.coverTitle}>{deck[key].name}</Text>
-                    <Text style={styles.coverSubtitle}>{deck[key].numberCards + ' card(s)'}</Text>
+                    <Text style={styles.coverSubtitle}>{deck[key].cardCount + ' card(s)'}</Text>
                 </View>
                 <View style={styles.coverOptions}>
                     <TouchableOpacity 
                         style={styles.button}
-                        onPress={() => this.props.navigation.navigate('CardForm')}
+                        onPress={() => this.props.navigation.navigate('CardForm',{ deckKey: key })}
                         >
                         <Text>Add Card</Text>
                     </TouchableOpacity>
@@ -85,4 +84,10 @@ export const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(connect()(DeckDetails))
+function mapStateToProps ({decks}) {
+    return {
+        deck: decks.item
+    }
+}
+
+export default withNavigation(connect(mapStateToProps)(DeckDetails))
