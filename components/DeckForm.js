@@ -12,7 +12,8 @@ import { generateUID } from '../utils/helpers'
 class DeckForm extends Component {
 
     state = {
-        name: ''
+        name: '',
+        toHome: false,
     }
 
     onPressSubmit = () => {
@@ -30,9 +31,20 @@ class DeckForm extends Component {
           })
           .then((deck) => dispatch(addDeck(deck)))
           .then(() => console.warn('foi?!'))*/
+
+        this.setState(() => ({
+           toHome: key ? false : true,
+        }))
     }
 
     render(){
+
+       const { toHome } = this.state
+
+        if(toHome === true){
+            return this.props.navigation.goBack()
+        }
+
         return(
             <View>
                 <Input 

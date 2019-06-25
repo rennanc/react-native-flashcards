@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text , Switch, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
@@ -36,6 +36,8 @@ class CardForm extends Component {
                     placeholder="Card Text"
                     onChangeText={(name) => this.setState({name})}
                     value={this.state.name}/>
+                <Text>Falso ou Verdadeiro?</Text>
+                <Switch disabled={this.state.answer} />
                 <Button
                     onPress={() => this.onPressSubmit()}
                     style={styles.buttonSubmit}
