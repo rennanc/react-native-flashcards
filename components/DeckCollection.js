@@ -22,13 +22,13 @@ class DeckCollection extends Component {
     loadDecks = () => {
         const { dispatch } = this.props
         fetchDeckResults()
-          .then((decks) => dispatch(receiveDecks(decks)))
+          .then(({decks}) => dispatch(receiveDecks(decks)))
           .then(() =>
             this.setState({
               loading: false,
-              refreshing: false,
+              refreshing: false
             })
-        )
+          )
     }
 
     handleRefresh = () => {
@@ -54,8 +54,8 @@ class DeckCollection extends Component {
             <View style={styles.container}>
                 <FlatList 
                     data={decks}
-                   // onRefresh={this.handleRefresh}
-                   // refreshing={this.state.refreshing}
+                    onRefresh={this.handleRefresh}
+                    refreshing={this.state.refreshing}
                     keyExtractor={(item, index) => 'key'+index }
                     renderItem={({ item }) => (
                         <Deck deck={item}/>

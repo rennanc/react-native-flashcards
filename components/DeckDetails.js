@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
+import { receiveDeckByKey } from '../actions/decks'
 
 
 onPressAddCard = () => {
@@ -14,9 +15,16 @@ onPressStartQuiz = () => {
 }
 
 class DeckDetails extends Component {
+
+    componentDidMount () {
+        const { dispatch, navigation } = this.props
+        const deckNav = navigation.getParam('deck', {});
+        dispatch(receiveDeckByKey(Object.keys(deckNav)[0]))
+    }
+
     render(){
-        const { deck } = this.props;
-        const key = Object.keys(deck)
+        const { deck } = this.props
+        const key = Object.keys(deck)[0]
         return(
             <View style={styles.container}>
                 <View style={styles.cover}>
@@ -32,7 +40,7 @@ class DeckDetails extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={[styles.button,styles.buttonQuiz]}
-                        onPress={onPressAddCard}
+                        onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
                         >
                         <Text style={{color: '#fff'}}>Start Quiz</Text>
                     </TouchableOpacity>

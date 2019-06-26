@@ -15,6 +15,13 @@ class CardForm extends Component {
         answer: false
     }
 
+    onChangeSwitch = (value) => {
+        this.setState({ 
+            ...this.state,
+            answer: value
+        })
+    }
+
     onPressSubmit = () => {
         const { dispatch, navigation } = this.props
 
@@ -31,14 +38,19 @@ class CardForm extends Component {
 
     render(){
         return(
-            <View>
+            <View style={styles.container}>
                 <Input 
                     style={styles.inputText}
-                    placeholder="Card Text"
-                    onChangeText={(name) => this.setState({name})}
+                    placeholder="Do it a question"
+                    onChangeText={(name) => this.setState({...this.state,text: name})}
                     value={this.state.name}/>
-                <Text>Falso ou Verdadeiro?</Text>
-                <Switch disabled={this.state.answer} />
+                <View style={{flex:1}}>
+                    <Text >Falso ou Verdadeiro?</Text>
+                    <Switch 
+                        value={this.state.answer}
+                        onValueChange={this.onChangeSwitch}
+                        />
+                </View>
                 <Button
                     onPress={() => this.onPressSubmit()}
                     style={styles.buttonSubmit}
@@ -56,9 +68,13 @@ class CardForm extends Component {
 export const styles = StyleSheet.create({
     ...container,
     inputText:{
+        flex: 1,
     },
     buttonSubmit:{
-        marginTop: 10
+        flex: 1,
+    },
+    switchButton: {
+        flex: 1,
     }
 })
 

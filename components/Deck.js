@@ -8,6 +8,7 @@ import { container } from '../utils/genericStyles'
 
 
 class Deck extends Component {
+
     render(){
         const { deck } = this.props;
         const key = Object.keys(deck)

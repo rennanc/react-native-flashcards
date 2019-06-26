@@ -1,4 +1,5 @@
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
+export const RECEIVE_DECK_BY_KEY = 'RECEIVE_DECK_BY_KEY'
 export const ADD_DECK = 'ADD_DECK'
 export const CARDS_COUNT_DECK = 'CARDS_COUNT_DECK'
 
@@ -9,6 +10,13 @@ export function receiveDecks(decks) {
     return {
         type: RECEIVE_DECKS,
         decks,
+    }
+}
+
+export function receiveDeckByKey(deckKey) {
+    return {
+        type: RECEIVE_DECK_BY_KEY,
+        deckKey
     }
 }
 

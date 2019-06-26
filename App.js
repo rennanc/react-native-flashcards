@@ -8,6 +8,7 @@ import DeckCollection from './components/DeckCollection'
 import DeckDetails from './components/DeckDetails'
 import DeckForm from './components/DeckForm'
 import CardForm from './components/CardForm'
+import Quiz from './components/Quiz'
 import StatusBarApp from './components/StatusBarApp'
 import {purple} from './utils/colors'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -35,6 +36,12 @@ const StackRouteConfigs = createStackNavigator({
     screen: CardForm,
     navigationOptions: {
       title: 'New Card'
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz'
     }
   }
 });
