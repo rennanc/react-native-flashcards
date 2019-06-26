@@ -19,7 +19,7 @@ class Card extends Component {
                             <Text style={styles.label}>See the answer</Text>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]} onPress={() => this.card.flip()} >
-                            <Text style={styles.label}>{cardData[key].answer}</Text>
+                            <Text style={styles.label}>{cardData[key].answer ? 'parabéns' : 'deu ruim'}</Text>
                         </TouchableOpacity>
                     </CardFlip>
                 )}

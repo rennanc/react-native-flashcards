@@ -15,7 +15,7 @@ class DeckCollection extends Component {
     }
 
     componentDidMount () {
-        //this.loadDecks()
+        this.loadDecks()
         //AsyncStorage.clear()
     }
 
