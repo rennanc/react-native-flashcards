@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet, Platform, TouchableOpacity, FlatList } from 'react-native'
-import { fetchDeckResults } from '../utils/api'
-import { receiveDecks } from '../actions/decks'
+import { handleReceiveDecks, receiveDecks } from '../actions/decks'
 import Deck from './Deck'
 import { MaterialIcons } from '@expo/vector-icons'
 import { AsyncStorage } from 'react-native'
@@ -16,19 +15,18 @@ class DeckCollection extends Component {
 
     componentDidMount () {
         this.loadDecks()
-        //AsyncStorage.clear()
     }
 
     loadDecks = () => {
         const { dispatch } = this.props
-        fetchDeckResults()
-          .then(({decks}) => dispatch(receiveDecks(decks)))
-          .then(() =>
-            this.setState({
-              loading: false,
-              refreshing: false
-            })
-          )
+
+        dispatch(handleReceiveDecks())
+            .then(() =>
+                this.setState({
+                loading: false,
+                refreshing: false
+                })
+            )
     }
 
     handleRefresh = () => {

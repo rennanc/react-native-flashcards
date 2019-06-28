@@ -1,3 +1,5 @@
+import { fetchDeckResults } from '../utils/api'
+
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const RECEIVE_DECK_BY_KEY = 'RECEIVE_DECK_BY_KEY'
 export const ADD_DECK = 'ADD_DECK'
@@ -10,6 +12,14 @@ export function receiveDecks(decks) {
     return {
         type: RECEIVE_DECKS,
         decks,
+    }
+}
+
+export function handleReceiveDecks(){
+    return (dispatch) => {
+
+        return fetchDeckResults()
+                .then((decks) => dispatch(receiveDecks(decks)))
     }
 }
 

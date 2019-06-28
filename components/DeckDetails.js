@@ -6,14 +6,6 @@ import { container } from '../utils/genericStyles'
 import { receiveDeckByKey } from '../actions/decks'
 
 
-onPressAddCard = () => {
-    
-}
-
-onPressStartQuiz = () => {
-    
-}
-
 class DeckDetails extends Component {
 
     componentDidMount () {
@@ -24,28 +16,32 @@ class DeckDetails extends Component {
 
     render(){
         const { deck } = this.props
-        const key = Object.keys(deck)[0]
+        const key = deck ? Object.keys(deck)[0] : 0
         return(
             <View style={styles.container}>
-                <View style={styles.cover}>
-                    <Text style={styles.coverTitle}>{deck[key].name}</Text>
-                    <Text style={styles.coverSubtitle}>{deck[key].cardCount + ' card(s)'}</Text>
+            { deck != null && key != null && (
+                <View style={styles.container} >
+                    <View style={styles.cover}>
+                        <Text style={styles.coverTitle}>{deck[key].name}</Text>
+                        <Text style={styles.coverSubtitle}>{deck[key].cardCount + ' card(s)'}</Text>
+                    </View>
+                    <View style={styles.coverOptions}>
+                        <TouchableOpacity 
+                            style={styles.button}
+                            onPress={() => this.props.navigation.navigate('CardForm',{ deckKey: key })}
+                            >
+                            <Text>Add Card</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={[styles.button,styles.buttonQuiz]}
+                            onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
+                            >
+                            <Text style={{color: '#fff'}}>Start Quiz</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.footer} />
                 </View>
-                <View style={styles.coverOptions}>
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('CardForm',{ deckKey: key })}
-                        >
-                        <Text>Add Card</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={[styles.button,styles.buttonQuiz]}
-                        onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
-                        >
-                        <Text style={{color: '#fff'}}>Start Quiz</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.footer} />
+            )}
             </View>
         )
     }
@@ -92,10 +88,15 @@ export const styles = StyleSheet.create({
     }
 })
 
-function mapStateToProps ({decks}) {
-    return {
-        deck: decks.item
+function mapStateToProps ({decks}, router) {
+    const deckNav = router.navigation.getParam('deck', {});
+    Object.keys(deckNav)[0]
+    if(decks.item != null){
+        return {
+            deck: decks.item
+        }
     }
+    return {}
 }
 
 export default withNavigation(connect(mapStateToProps)(DeckDetails))
