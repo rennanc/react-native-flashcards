@@ -8,14 +8,29 @@ import Card from './Card'
 class Quiz extends Component {
 
     state = {
-        card: {}
+        card: {},
+        cardIndex: 0
     }
 
     componentDidMount() {
         const { cards } = this.props
 
         this.setState({
-            card: cards[0]
+            card: cards[0],
+            cardIndex: 0
+        })
+    }
+
+    handleAnswer = () => {
+
+    }
+
+    handleNextCard = () => {
+        const { cards } = this.props
+        const cardIndex = ++this.state.cardIndex
+        this.setState({
+            card: cards[cardIndex],
+            cardIndex
         })
     }
 
@@ -25,12 +40,13 @@ class Quiz extends Component {
         
         return(
             <View style={styles.container}>
-                <Card  cardData={card}/>
+                <Card cardData={card}/>
                 <View style={styles.coverOptions}>
                     <TouchableOpacity 
                         style={styles.button}
+                        onPress={() => this.handleNextCard()}
                         >
-                        <Text>Correct</Text>
+                        <Text style={{color: '#fff'}}>Correct</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={[styles.button,styles.buttonQuiz]}
@@ -50,27 +66,29 @@ export const styles = StyleSheet.create({
         flex: 6,
     },
     coverOptions: {
-        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        flex: 1,
+        position: 'absolute',
         alignItems: 'center',
-        alignSelf: 'flex-end'
+        bottom: 0
     },
     button: {
         flex: 1,
         height: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#01a699',
         borderWidth: 0.5,
         borderRadius: 4,
-        marginTop: 10,
+        margin: 20,
+        fontSize: 30,
     },
     buttonQuiz: {
-        backgroundColor: '#0aa',
+        backgroundColor: '#b71845',
     },
     footer:{
         flex: 1,
+        justifyContent: 'flex-end',
     }
 })
 

@@ -16,13 +16,13 @@ class Card extends Component {
                     <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]} onPress={() => this.card.flip()} >
                             <Text style={styles.label}>{cardData[key].text}</Text>
-                            <Text style={styles.label}>See the answer</Text>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]} onPress={() => this.card.flip()} >
                             <Text style={styles.label}>{cardData[key].answer ? 'parabéns' : 'deu ruim'}</Text>
                         </TouchableOpacity>
                     </CardFlip>
                 )}
+                <Text >See the answer</Text>
             </View>
         )
     }
@@ -31,8 +31,7 @@ class Card extends Component {
 export const styles = StyleSheet.create({
     ...container,
     cardContainer:{
-        width: 320,
-        height: 470,
+        flex:1,
     },
     card:{
         width: 320,
