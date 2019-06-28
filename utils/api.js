@@ -2,6 +2,18 @@ import { AsyncStorage } from 'react-native'
 import { DECKS_STORAGE_KEY } from './_decks'
 import { CARDS_STORAGE_KEY } from './_cards'
 
+
+export function getInitialData () {
+  return Promise.all([
+    fetchDeckResults(),
+    fetchCardResults()
+  ]).then(([decks, cards]) => ({
+    decks,
+    cards
+  }))
+}
+
+
 export function fetchDeckResults () {
     return AsyncStorage.getItem(DECKS_STORAGE_KEY)
       .then((results) => JSON.parse(results))
@@ -45,6 +57,12 @@ export function removeDeck (key) {
 
 export function fetchCardResults () {
   return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+      .then((results) => JSON.parse(results))
+      .then( (results) =>
+        Object.keys(results).map(function(key){
+          return {[key] : results[key]}
+        })
+      )
 }
 
 export function createCard ({ card, key }) {

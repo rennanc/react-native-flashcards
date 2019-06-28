@@ -5,6 +5,7 @@ import { handleReceiveDecks, receiveDecks } from '../actions/decks'
 import Deck from './Deck'
 import { MaterialIcons } from '@expo/vector-icons'
 import { AsyncStorage } from 'react-native'
+import { handleInitialData } from "../actions/shared"
 
 class DeckCollection extends Component {
 
@@ -13,8 +14,8 @@ class DeckCollection extends Component {
         refreshing: false,
     }
 
-    componentDidMount () {
-        this.loadDecks()
+    componentWillMount(){
+        this.props.dispatch(handleInitialData())
     }
 
     loadDecks = () => {

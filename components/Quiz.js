@@ -25,7 +25,7 @@ class Quiz extends Component {
         
         return(
             <View style={styles.container}>
-                <Card style={styles.card} cardData={card}/>
+                <Card  cardData={card}/>
                 <View style={styles.coverOptions}>
                     <TouchableOpacity 
                         style={styles.button}

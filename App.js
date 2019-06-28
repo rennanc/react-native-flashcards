@@ -49,6 +49,7 @@ const StackRouteConfigs = createStackNavigator({
 const MainNavigator = createAppContainer(StackRouteConfigs);
 
 export default class App extends React.Component {
+
   render(){
     return (
       <Provider store={createStore(reducer, middleware)}>
