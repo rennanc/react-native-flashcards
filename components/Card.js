@@ -11,18 +11,20 @@ class Card extends Component {
         const { cardData } = this.props
         const key = cardData != null ? Object.keys(cardData)[0] : null
         return(
-            <View style={styles.container}>
+            <View style={styles.container} >
                 {key != null && (
-                    <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
+                    <CardFlip style={styles.cardContainer}  ref={(card) => this.card = card} >
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]} onPress={() => this.card.flip()} >
-                            <Text style={styles.label}>{cardData[key].text}</Text>
+                            <View>
+                                <Text style={styles.label}>{cardData[key].text}</Text>
+                                <Text style={styles.instruction}>Touch to see the answer</Text>
+                            </View>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]} onPress={() => this.card.flip()} >
                             <Text style={styles.label}>{cardData[key].answer ? 'parabéns' : 'deu ruim'}</Text>
                         </TouchableOpacity>
                     </CardFlip>
                 )}
-                <Text >See the answer</Text>
             </View>
         )
     }
@@ -30,8 +32,14 @@ class Card extends Component {
 
 export const styles = StyleSheet.create({
     ...container,
+    container:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
     cardContainer:{
-        flex:1,
+        width: 320,
+        height: 470,
     },
     card:{
         width: 320,
@@ -59,6 +67,9 @@ export const styles = StyleSheet.create({
         color: '#ffffff',
         backgroundColor: 'transparent',
     },
+    instruction: {
+        textAlign: 'center'
+    }
 })
 
 export default withNavigation(connect()(Card))
