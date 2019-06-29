@@ -17,7 +17,7 @@ class Card extends Component {
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]} onPress={() => this.card.flip()} >
                             <View>
                                 <Text style={styles.label}>{cardData[key].text}</Text>
-                                <Text style={styles.instruction}>Touch to see the answer</Text>
+                                <Text style={styles.instruction}>Answer</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]} onPress={() => this.card.flip()} >
@@ -68,7 +68,11 @@ export const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     instruction: {
-        textAlign: 'center'
+        marginTop: -150,
+        textAlign: 'center',
+        fontSize: 24,
+        color: '#ffffff',
+        backgroundColor: 'transparent',
     }
 })
 

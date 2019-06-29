@@ -5,11 +5,15 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { container } from '../utils/genericStyles'
 import Card from './Card'
 
+const CORRECT_ANSWER = 1
+const INCORRECT_ANSWER = 2
+
 class Quiz extends Component {
 
     state = {
         card: {},
-        cardIndex: 0
+        cardIndex: 0,
+        score: 0
     }
 
     componentDidMount() {
@@ -17,12 +21,27 @@ class Quiz extends Component {
 
         this.setState({
             card: cards[0],
-            cardIndex: 0
+            cardIndex: 0,
+            score: 0,
         })
     }
 
-    handleAnswer = () => {
+    handleAnswer = (answer) => {
+        const { card } = this.state
+        answer = answer === 1 ? true : false
+        const key = this.getObjectKey(card)
+        if(card[key].answer === answer){
+            this.setState({
+                ...this.state,
+                score: ++this.state.score
+            })
+        }
 
+        this.handleNextCard()
+    }
+
+    getObjectKey = (object) => {
+        return Object.keys(object)[0]
     }
 
     handleNextCard = () => {
@@ -35,25 +54,32 @@ class Quiz extends Component {
     }
 
     render(){
-
-        const { card } = this.state
+        const { cards } = this.props
+        const { card, cardIndex } = this.state
         
         return(
             <View style={styles.container}>
-                <Card style={styles.card} cardData={card}/>
-                <View style={styles.coverOptions}>
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => this.handleNextCard()}
-                        >
-                        <Text style={{color: '#fff'}}>Correct</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={[styles.button,styles.buttonQuiz]}
-                        >
-                        <Text style={{color: '#fff'}}>Incorrect</Text>
-                    </TouchableOpacity>
-                </View>
+                <Text style={styles.scoreText}>{"Score: " + this.state.score}</Text>
+                { cardIndex < cards.length && (
+                    <View style={styles.quizBox}>
+                    <Text>{(cardIndex+1) + "/" +  cards.length}</Text>
+                        <Card style={styles.card} cardData={card}/>
+                        <View style={styles.coverOptions}>
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={() => this.handleAnswer(CORRECT_ANSWER)}
+                                >
+                                <Text style={{color: '#fff'}}>Correct</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={[styles.button,styles.buttonQuiz]}
+                                onPress={() => this.handleAnswer(INCORRECT_ANSWER)}
+                                >
+                                <Text style={{color: '#fff'}}>Incorrect</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                )}
                 <View style={styles.footer} />
             </View>
         )
@@ -62,8 +88,8 @@ class Quiz extends Component {
 
 export const styles = StyleSheet.create({
     ...container,
-    card:{
-        flex: 6,
+    quizBox:{
+        flex: 10,
     },
     coverOptions: {
         flexDirection: 'row',
@@ -89,6 +115,10 @@ export const styles = StyleSheet.create({
     footer:{
         flex: 1,
         justifyContent: 'flex-end',
+    },
+    scoreText:{
+        fontSize: 30,
+        textAlign: 'center',
     }
 })
 
