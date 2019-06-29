@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
@@ -32,6 +32,7 @@ class DeckForm extends Component {
     render(){
         return(
             <View>
+                <Text style={styles.title}>What is the title of your new deck?</Text>
                 <Input 
                     style={styles.inputText}
                     placeholder="Deck Name"
@@ -53,7 +54,15 @@ class DeckForm extends Component {
 
 export const styles = StyleSheet.create({
     ...container,
+    title:{
+        fontSize: 45,
+        textAlign: 'center',
+    },
     inputText:{
+        marginTop: 20,
+        borderLeftWidth: 4,
+        borderRightWidth: 4,
+        height: 70
     },
     buttonSubmit:{
         marginTop: 10
