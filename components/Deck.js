@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { container } from '../utils/genericStyles'
-
+import { MaterialIcons } from '@expo/vector-icons'
 
 
 class Deck extends Component {
@@ -20,10 +20,11 @@ class Deck extends Component {
                 <ListItem 
                     key={key}
                     title={deck[key].name}
-                    titleStyle={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center' }}
+                    titleStyle={{ fontWeight: 'bold', fontSize: 30 }}
                     subtitle={deck[key].cardCount + ' Card(s)'}
-                    subtitleStyle={{fontSize: 15, textAlign: 'center'}}
+                    subtitleStyle={{fontSize: 15}}
                     chevronColor="black"
+                    leftIcon={{name: 'cards', type: 'material-community', color:'#4e4cb8', size:40}}
                     bottomDivider={true}
                 />
             </TouchableOpacity>

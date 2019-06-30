@@ -10,38 +10,56 @@ import DeckForm from './components/DeckForm'
 import CardForm from './components/CardForm'
 import Quiz from './components/Quiz'
 import StatusBarApp from './components/StatusBarApp'
-import {purple} from './utils/colors'
+import {purple, white} from './utils/colors'
 import { setLocalNotification } from './utils/helpers'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
+
+
+const navigationOptionsDefault = {
+  title: 'Flashcards',
+  headerStyle: {
+    backgroundColor: purple,
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+    color: white
+  }
+}
 
 const StackRouteConfigs = createStackNavigator({
   Home: {
     screen: DeckCollection,
     navigationOptions: {
-      title: 'Decks'
+      ...navigationOptionsDefault,
+      title: 'Flashcards',
     }
   },
   DeckDetails: {
     screen: DeckDetails,
     navigationOptions: {
-      title: 'DeckDetails'
+      ...navigationOptionsDefault,
+      title: 'Deck'
     }
   },
   DeckForm: {
     screen: DeckForm,
     navigationOptions: {
+      ...navigationOptionsDefault,
       title: 'New Deck'
     }
   },
   CardForm: {
     screen: CardForm,
     navigationOptions: {
+      ...navigationOptionsDefault,
       title: 'New Card'
     }
   },
   Quiz: {
     screen: Quiz,
     navigationOptions: {
+      ...navigationOptionsDefault,
       title: 'Quiz'
     }
   }
