@@ -20,7 +20,11 @@ class Deck extends Component {
                 <ListItem 
                     key={key}
                     title={deck[key].name}
+                    titleStyle={{ fontWeight: 'bold', fontSize: 30, textAlign: 'center' }}
                     subtitle={deck[key].cardCount + ' Card(s)'}
+                    subtitleStyle={{fontSize: 15, textAlign: 'center'}}
+                    chevronColor="black"
+                    bottomDivider={true}
                 />
             </TouchableOpacity>
         )

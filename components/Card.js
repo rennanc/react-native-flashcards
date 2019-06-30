@@ -15,13 +15,14 @@ class Card extends Component {
                 {key != null && (
                     <CardFlip style={styles.cardContainer}  ref={(card) => this.card = card} >
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]} onPress={() => this.card.flip()} >
-                            <View>
-                                <Text style={styles.label}>{cardData[key].text}</Text>
-                                <Text style={styles.instruction}>Answer</Text>
+                            <View style={{flex:1}}>
+                                <Text style={styles.label}>{cardData[key].question}</Text>
+                                <Text style={styles.instruction}>Show Answer</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]} onPress={() => this.card.flip()} >
-                            <Text style={styles.label}>{cardData[key].answer ? 'parabéns' : 'deu ruim'}</Text>
+                            <Text style={styles.label}>{cardData[key].answer}</Text>
+                            <Text style={styles.instruction}>Question</Text>
                         </TouchableOpacity>
                     </CardFlip>
                 )}
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     card:{
         width: 320,
         height: 470,
-        backgroundColor: '#FE474C',
+        backgroundColor: '#01a699',
         borderRadius: 5,
         shadowColor: 'rgba(0,0,0,0.5)',
         shadowOffset: {
@@ -54,21 +55,23 @@ export const styles = StyleSheet.create({
         shadowOpacity:0.5,
     },
     card1: {
-        backgroundColor: '#FE474C',
+        backgroundColor: '#01a699',
     },
     card2: {
-        backgroundColor: '#FEB12C',
+        backgroundColor: '#4e4cb8',
     },
     label: {
-        lineHeight: 470,
+        //lineHeight: 470,
+        marginTop:120,
         textAlign: 'center',
         fontSize: 55,
         fontFamily: 'System',
         color: '#ffffff',
+        flexDirection:'row',
+        flexWrap: 'wrap',
         backgroundColor: 'transparent',
     },
     instruction: {
-        marginTop: -150,
         textAlign: 'center',
         fontSize: 24,
         color: '#ffffff',

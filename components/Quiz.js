@@ -27,10 +27,7 @@ class Quiz extends Component {
     }
 
     handleAnswer = (answer) => {
-        const { card } = this.state
-        answer = answer === 1 ? true : false
-        const key = this.getObjectKey(card)
-        if(card[key].answer === answer){
+        if(CORRECT_ANSWER === answer){
             this.setState({
                 ...this.state,
                 score: ++this.state.score
@@ -44,10 +41,21 @@ class Quiz extends Component {
         return Object.keys(object)[0]
     }
 
+    handleRestartQuiz = () => {
+        const { cards } = this.props
+        this.setState({
+            ...this.state,
+            card: cards[0],
+            cardIndex: 0,
+            score: 0
+        })
+    }
+
     handleNextCard = () => {
         const { cards } = this.props
         const cardIndex = ++this.state.cardIndex
         this.setState({
+            ...this.state,
             card: cards[cardIndex],
             cardIndex
         })
@@ -59,10 +67,9 @@ class Quiz extends Component {
         
         return(
             <View style={styles.container}>
-                <Text style={styles.scoreText}>{"Score: " + this.state.score}</Text>
                 { cardIndex < cards.length && (
                     <View style={styles.quizBox}>
-                    <Text>{(cardIndex+1) + "/" +  cards.length}</Text>
+                        <Text style={styles.cardIndexer}>{(cardIndex+1) + "/" +  cards.length}</Text>
                         <Card style={styles.card} cardData={card}/>
                         <View style={styles.coverOptions}>
                             <TouchableOpacity 
@@ -80,7 +87,27 @@ class Quiz extends Component {
                         </View>
                     </View>
                 )}
-                <View style={styles.footer} />
+                { cardIndex >= cards.length && (
+                        <View style={{flex:1}}>
+                            <Text style={styles.scoreText}>{"Score: " + this.state.score}</Text>
+                            <View style={{flex:1}}>
+                                <TouchableOpacity 
+                                    style={styles.button}
+                                    onPress={() => this.handleRestartQuiz()}
+                                    >
+                                    <Text style={{color: '#fff'}}>Restart Quiz</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity 
+                                    style={[styles.button,styles.buttonQuiz]}
+                                    onPress={() => this.props.navigation.goBack()}
+                                    >
+                                    <Text style={{color: '#fff'}}>Back to Deck</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    )
+                }
+
             </View>
         )
     }
@@ -116,9 +143,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
     },
-    scoreText:{
+    cardIndexer:{
         fontSize: 30,
         textAlign: 'center',
+    },
+    scoreText:{
+        fontSize: 50,
+        flex:1,
+        margin: 100,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 

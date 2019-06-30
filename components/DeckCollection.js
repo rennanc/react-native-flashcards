@@ -15,6 +15,7 @@ class DeckCollection extends Component {
     }
 
     componentWillMount(){
+        //AsyncStorage.clear()
         this.props.dispatch(handleInitialData())
     }
 

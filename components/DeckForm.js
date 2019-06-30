@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
 import { createDeck } from '../utils/api'
 import { addDeck } from '../actions/decks'
-import { generateUID } from '../utils/helpers'
+import { generateUID, clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class DeckForm extends Component {
 
@@ -17,7 +17,7 @@ class DeckForm extends Component {
     }
 
     onPressSubmit = () => {
-        const { dispatch, id } = this.props
+        const { dispatch } = this.props
 
         const key = generateUID()
         const deck = {
@@ -27,24 +27,28 @@ class DeckForm extends Component {
         dispatch(addDeck({[key]: deck}))
         createDeck({ key, deck })
             .then(() => this.props.navigation.goBack())
+            .then(() => 
+                clearLocalNotification()
+                    .then(setLocalNotification)
+            )
     }
 
     render(){
         return(
             <View>
                 <Text style={styles.title}>What is the title of your new deck?</Text>
-                <Input 
-                    style={styles.inputText}
-                    placeholder="Deck Name"
-                    onChangeText={(name) => this.setState({name})}
-                    value={this.state.name}/>
+                <View style={styles.inputText}>
+                    <Input 
+                        placeholder="Deck Name"
+                        onChangeText={(name) => this.setState({name})}
+                        value={this.state.name}/>
+                </View>
                 <Button
                     onPress={() => this.onPressSubmit()}
-                    style={styles.buttonSubmit}
                     title="Salvar"
-                    type="outline"
+                    buttonStyle={styles.buttonSubmit}
                     icon={
-                        <MaterialIcons name="save" size={30} color="#01a699" />
+                        <MaterialIcons name="save" size={30} color="#fff" />
                     }
                 />
             </View>
@@ -56,16 +60,20 @@ export const styles = StyleSheet.create({
     ...container,
     title:{
         fontSize: 45,
+        marginTop: 50,
         textAlign: 'center',
     },
     inputText:{
-        marginTop: 20,
-        borderLeftWidth: 4,
-        borderRightWidth: 4,
-        height: 70
+        margin: 50,
+        borderWidth: 1,
+        height: 70,
+        borderRadius: 10,
     },
     buttonSubmit:{
-        marginTop: 10
+        marginTop: 10,
+        margin: 50,
+        borderRadius: 10,
+        backgroundColor: '#01a699',
     }
 })
 

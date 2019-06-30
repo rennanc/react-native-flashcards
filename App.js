@@ -11,6 +11,7 @@ import CardForm from './components/CardForm'
 import Quiz from './components/Quiz'
 import StatusBarApp from './components/StatusBarApp'
 import {purple} from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 const StackRouteConfigs = createStackNavigator({
@@ -49,7 +50,9 @@ const StackRouteConfigs = createStackNavigator({
 const MainNavigator = createAppContainer(StackRouteConfigs);
 
 export default class App extends React.Component {
-
+  componentDidMount() {
+    setLocalNotification()
+  }
   render(){
     return (
       <Provider store={createStore(reducer, middleware)}>

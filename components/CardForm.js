@@ -11,8 +11,8 @@ import { generateUID } from '../utils/helpers'
 class CardForm extends Component {
 
     state = {
-        text: '',
-        answer: false
+        question: '',
+        answer: ''
     }
 
     onChangeSwitch = (value) => {
@@ -28,7 +28,7 @@ class CardForm extends Component {
         const deckKey = navigation.getParam('deckKey', null)
         const key = generateUID()
         const card = {
-            text: this.state.text,
+            question: this.state.question,
             answer: this.state.answer,
             deckKey: deckKey
         }
@@ -39,25 +39,24 @@ class CardForm extends Component {
     render(){
         return(
             <View style={styles.container}>
+                <Text style={styles.title}>Do it a question</Text>
                 <Input 
                     style={styles.inputText}
                     placeholder="Do it a question"
-                    onChangeText={(name) => this.setState({...this.state,text: name})}
-                    value={this.state.name}/>
-                <View style={{flex:1}}>
-                    <Text >Falso ou Verdadeiro?</Text>
-                    <Switch 
-                        value={this.state.answer}
-                        onValueChange={this.onChangeSwitch}
-                        />
-                </View>
+                    onChangeText={(question) => this.setState({...this.state,question: question})}
+                    value={this.state.question}/>
+                <Text style={styles.title}>Write a answer</Text>
+                <Input 
+                    style={styles.inputText}
+                    placeholder="Write a answer"
+                    onChangeText={(answer) => this.setState({...this.state,answer: answer})}
+                    value={this.state.answer}/>
                 <Button
                     onPress={() => this.onPressSubmit()}
-                    style={styles.buttonSubmit}
+                    buttonStyle={styles.buttonSubmit}
                     title="Salvar"
-                    type="outline"
                     icon={
-                        <MaterialIcons name="save" size={30} color="#01a699" />
+                        <MaterialIcons name="save" size={30} color="#fff" />
                     }
                 />
             </View>
@@ -68,15 +67,26 @@ class CardForm extends Component {
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
+    title:{
+        fontSize: 45,
+        marginTop: 50,
+        textAlign: 'center',
+    },
     inputText:{
-        flex: 1,
+        margin: 50,
+        borderWidth: 1,
+        height: 70,
+        borderRadius: 10,
     },
     buttonSubmit:{
-        flex: 1,
+        marginTop: 30,
+        margin: 50,
+        borderRadius: 10,
+        backgroundColor: '#01a699',
     },
     switchButton: {
         flex: 1,
