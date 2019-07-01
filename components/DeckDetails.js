@@ -4,6 +4,8 @@ import { withNavigation } from 'react-navigation'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { receiveDeckByKey } from '../actions/decks'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import {purple} from '../utils/colors'
 
 
 class DeckDetails extends Component {
@@ -22,6 +24,7 @@ class DeckDetails extends Component {
             { deck != null && key != null && (
                 <View style={styles.container} >
                     <View style={styles.cover}>
+                        <MaterialCommunityIcons name="cards" size={70} color={purple} />
                         <Text style={styles.coverTitle}>{deck[key].name}</Text>
                         <Text style={styles.coverSubtitle}>{deck[key].cardCount + ' card(s)'}</Text>
                     </View>
@@ -32,12 +35,15 @@ class DeckDetails extends Component {
                             >
                             <Text>Add Card</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
-                            style={[styles.button,styles.buttonQuiz]}
-                            onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
-                            >
-                            <Text style={{color: '#fff'}}>Start Quiz</Text>
-                        </TouchableOpacity>
+                        { deck[key].cardCount > 0 && (
+                            <TouchableOpacity 
+                                style={[styles.button,styles.buttonQuiz]}
+                                onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
+                                >
+                                <Text style={{color: '#fff'}}>Start Quiz</Text>
+                            </TouchableOpacity>
+                        )}
+                        
                     </View>
                     <View style={styles.footer} />
                 </View>

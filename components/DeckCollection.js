@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, StyleSheet, Platform, TouchableOpacity, FlatList } from 'react-native'
-import { handleReceiveDecks, receiveDecks } from '../actions/decks'
+import { View, StyleSheet, Platform, TouchableOpacity, FlatList, AsyncStorage } from 'react-native'
+import { handleReceiveDecks } from '../actions/decks'
 import Deck from './Deck'
 import { MaterialIcons } from '@expo/vector-icons'
-import { AsyncStorage } from 'react-native'
 import { handleInitialData } from "../actions/shared"
 
 class DeckCollection extends Component {
