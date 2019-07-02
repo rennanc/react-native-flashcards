@@ -17,7 +17,7 @@ class DeckForm extends Component {
     }
 
     onPressSubmit = () => {
-        const { dispatch } = this.props
+        const { dispatch, navigation } = this.props
 
         const key = generateUID()
         const deck = {
@@ -26,7 +26,8 @@ class DeckForm extends Component {
         }
         dispatch(addDeck({[key]: deck}))
         createDeck({ key, deck })
-            .then(() => this.props.navigation.goBack())
+            .then(() => navigation.pop())
+            .then(() => navigation.navigate('DeckDetails',{deck:{[key]: deck}}))
             .then(() => 
                 clearLocalNotification()
                     .then(setLocalNotification)
@@ -45,7 +46,7 @@ class DeckForm extends Component {
                 </View>
                 <Button
                     onPress={() => this.onPressSubmit()}
-                    title="Salvar"
+                    title="Submit"
                     buttonStyle={styles.buttonSubmit}
                     icon={
                         <MaterialIcons name="save" size={30} color="#fff" />

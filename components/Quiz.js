@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { container } from '../utils/genericStyles'
 import Card from './Card'
+import AnimateNumber from 'react-native-countup'
 
 const CORRECT_ANSWER = 1
 const INCORRECT_ANSWER = 2
@@ -89,7 +90,9 @@ class Quiz extends Component {
                 )}
                 { cardIndex >= cards.length && (
                         <View style={{flex:1}}>
-                            <Text style={styles.scoreText}>{"Score: " + this.state.score}</Text>
+                            <Text style={styles.scoreText}>{"Score: "}
+                            <AnimateNumber initial={0} value={this.state.score} countBy={1} />
+                            </Text>
                             <View style={{flex:1}}>
                                 <TouchableOpacity 
                                     style={styles.button}

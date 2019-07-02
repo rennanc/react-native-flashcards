@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
-import { View, Text , Switch, StyleSheet, TouchableOpacity } from 'react-native'
-import { container } from '../utils/genericStyles'
+import { View, Text, StyleSheet } from 'react-native'
 import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
 import { handleCreateCard } from '../actions/cards'
@@ -54,7 +53,7 @@ class CardForm extends Component {
                 <Button
                     onPress={() => this.onPressSubmit()}
                     buttonStyle={styles.buttonSubmit}
-                    title="Salvar"
+                    title="Submit"
                     icon={
                         <MaterialIcons name="save" size={30} color="#fff" />
                     }

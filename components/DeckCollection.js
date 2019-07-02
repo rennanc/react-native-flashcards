@@ -22,7 +22,7 @@ class DeckCollection extends Component {
         const { dispatch } = this.props
 
         dispatch(handleReceiveDecks())
-            .then(() =>
+            .then(() => 
                 this.setState({
                 loading: false,
                 refreshing: false
