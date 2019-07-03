@@ -47,6 +47,7 @@ class DeckForm extends Component {
                 <Button
                     onPress={() => this.onPressSubmit()}
                     title="Submit"
+                    disabled={this.state.name === ''}
                     buttonStyle={styles.buttonSubmit}
                     icon={
                         <MaterialIcons name="save" size={30} color="#fff" />

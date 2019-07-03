@@ -7,6 +7,12 @@ import CardFlip from 'react-native-card-flip'
 
 class Card extends Component {
 
+    componentDidUpdate() {
+        if(this.card != null && this.card.state.side === 1){
+            this.card.flip()
+        }
+    }
+
     render(){
         const { cardData } = this.props
         const key = cardData != null ? Object.keys(cardData)[0] : null
@@ -14,7 +20,10 @@ class Card extends Component {
             <View style={styles.container} >
                 {key != null && (
                     <CardFlip style={styles.cardContainer}  ref={(card) => this.card = card} >
-                        <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]} onPress={() => this.card.flip()} >
+                        <TouchableOpacity 
+                            activeOpacity={1} 
+                            style={[styles.card, styles.card1]}
+                            onPress={() => this.card.flip()} >
                             <View style={{flex:1}}>
                                 <Text style={styles.label}>{cardData[key].question}</Text>
                                 <Text style={styles.instruction}>Show Answer</Text>

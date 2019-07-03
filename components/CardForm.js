@@ -36,23 +36,26 @@ class CardForm extends Component {
     }
 
     render(){
+        const { question, answer } = this.state
+
         return(
             <View style={styles.container}>
                 <Text style={styles.title}>Do it a question</Text>
                 <Input 
                     style={styles.inputText}
                     placeholder="Do it a question"
-                    onChangeText={(question) => this.setState({...this.state,question: question})}
-                    value={this.state.question}/>
+                    onChangeText={(q) => this.setState({...this.state, question: q})}
+                    value={question}/>
                 <Text style={styles.title}>Write a answer</Text>
                 <Input 
                     style={styles.inputText}
                     placeholder="Write a answer"
-                    onChangeText={(answer) => this.setState({...this.state,answer: answer})}
-                    value={this.state.answer}/>
+                    onChangeText={(a) => this.setState({...this.state, answer: a})}
+                    value={answer}/>
                 <Button
                     onPress={() => this.onPressSubmit()}
                     buttonStyle={styles.buttonSubmit}
+                    disabled={answer === '' || question === ''}
                     title="Submit"
                     icon={
                         <MaterialIcons name="save" size={30} color="#fff" />
