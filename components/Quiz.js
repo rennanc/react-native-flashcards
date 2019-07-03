@@ -5,6 +5,8 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { container } from '../utils/genericStyles'
 import Card from './Card'
 import AnimateNumber from 'react-native-countup'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+import { MaterialIcons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
 const CORRECT_ANSWER = 1
 const INCORRECT_ANSWER = 2
@@ -61,6 +63,11 @@ class Quiz extends Component {
             cardIndex
         })
     }
+    
+    handleClearNotification = () => {
+        clearLocalNotification()
+           .then(setLocalNotification)
+    }
 
     render(){
         const { cards } = this.props
@@ -77,12 +84,14 @@ class Quiz extends Component {
                                 style={styles.button}
                                 onPress={() => this.handleAnswer(CORRECT_ANSWER)}
                                 >
+                                <MaterialIcons name="check-circle" size={30} color="#fff" />
                                 <Text style={{color: '#fff'}}>Correct</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 
                                 style={[styles.button,styles.buttonQuiz]}
                                 onPress={() => this.handleAnswer(INCORRECT_ANSWER)}
                                 >
+                                <AntDesign name="closecircle" size={30} color="#fff" />
                                 <Text style={{color: '#fff'}}>Incorrect</Text>
                             </TouchableOpacity>
                         </View>
@@ -98,12 +107,14 @@ class Quiz extends Component {
                                     style={styles.button}
                                     onPress={() => this.handleRestartQuiz()}
                                     >
+                                    <MaterialCommunityIcons name="restart" size={30} color="#fff" />
                                     <Text style={{color: '#fff'}}>Restart Quiz</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     style={[styles.button,styles.buttonQuiz]}
                                     onPress={() => this.props.navigation.goBack()}
                                     >
+                                    <MaterialIcons name="settings-backup-restore" size={30} color="#fff" />
                                     <Text style={{color: '#fff'}}>Back to Deck</Text>
                                 </TouchableOpacity>
                             </View>
@@ -135,7 +146,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#01a699',
         borderWidth: 0.5,
-        borderRadius: 4,
+        borderRadius: 10,
         margin: 20,
         fontSize: 30,
     },

@@ -4,9 +4,9 @@ The Project is an application to create flashcards to remember short questions t
 
 This project represent the final project for the Udacity React Native course.
 
-## Initial instruction
+## Platform
 
-To use the frontend project, you need follow before the steps to run the Api Server.
+This app was developed and tested using ONLY Android.
 
 ## Instruction to Use
 

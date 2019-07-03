@@ -5,6 +5,7 @@ import { handleReceiveDecks } from '../actions/decks'
 import Deck from './Deck'
 import { MaterialIcons } from '@expo/vector-icons'
 import { handleInitialData } from "../actions/shared"
+import { setLocalNotification } from '../utils/helpers'
 
 class DeckCollection extends Component {
 
@@ -16,6 +17,7 @@ class DeckCollection extends Component {
     componentWillMount(){
         //AsyncStorage.clear()
         this.props.dispatch(handleInitialData())
+        setLocalNotification()
     }
 
     loadDecks = () => {

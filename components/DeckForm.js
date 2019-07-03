@@ -7,7 +7,7 @@ import { Button, Input } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons'
 import { createDeck } from '../utils/api'
 import { addDeck } from '../actions/decks'
-import { generateUID, clearLocalNotification, setLocalNotification } from '../utils/helpers'
+import { generateUID } from '../utils/helpers'
 
 class DeckForm extends Component {
 
@@ -28,10 +28,6 @@ class DeckForm extends Component {
         createDeck({ key, deck })
             .then(() => navigation.pop())
             .then(() => navigation.navigate('DeckDetails',{deck:{[key]: deck}}))
-            .then(() => 
-                clearLocalNotification()
-                    .then(setLocalNotification)
-            )
     }
 
     render(){

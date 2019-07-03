@@ -4,7 +4,6 @@ import { withNavigation } from 'react-navigation'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import { container } from '../utils/genericStyles'
-import { MaterialIcons } from '@expo/vector-icons'
 
 
 class Deck extends Component {
@@ -23,9 +22,9 @@ class Deck extends Component {
                     titleStyle={{ fontWeight: 'bold', fontSize: 30 }}
                     subtitle={deck[key].cardCount + ' Card(s)'}
                     subtitleStyle={{fontSize: 15}}
-                    chevronColor="black"
                     leftIcon={{name: 'cards', type: 'material-community', color:'#4e4cb8', size:40}}
                     bottomDivider={true}
+                    containerStyle={styles.ListItem}
                 />
             </TouchableOpacity>
         )
@@ -34,6 +33,17 @@ class Deck extends Component {
 
 export const styles = StyleSheet.create({
     ...container,
+    ListItem:{
+        margin:10,
+        borderWidth: 0.5,
+        borderColor: '#fff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        elevation: 2,
+    }
 })
 
 export default withNavigation(connect()(Deck))

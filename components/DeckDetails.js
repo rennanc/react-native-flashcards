@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { container } from '../utils/genericStyles'
 import { receiveDeckByKey } from '../actions/decks'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import {purple} from '../utils/colors'
 
 
@@ -33,6 +33,7 @@ class DeckDetails extends Component {
                             style={styles.button}
                             onPress={() => this.props.navigation.navigate('CardForm',{ deckKey: key })}
                             >
+                            <MaterialIcons name="add-circle" size={30} color="#000" />
                             <Text>Add Card</Text>
                         </TouchableOpacity>
                         { deck[key].cardCount > 0 && (
@@ -40,6 +41,7 @@ class DeckDetails extends Component {
                                 style={[styles.button,styles.buttonQuiz]}
                                 onPress={() => this.props.navigation.navigate('Quiz',{ deckKey: key })}
                                 >
+                                <MaterialIcons name="play-circle-filled" size={30} color="#fff" />
                                 <Text style={{color: '#fff'}}>Start Quiz</Text>
                             </TouchableOpacity>
                         )}
